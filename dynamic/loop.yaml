@@ -5,7 +5,7 @@
   become_method: sudo
   tasks:
     - name: Install multiple packages
-      packages:
+      package:
         name: "{{item}}"
         state: present
       with_items:
@@ -16,4 +16,3 @@
         - gzip
         - httpd
         - sshd
-        
