@@ -23,7 +23,7 @@
     - name: Install lftp
       package:
         name: lftp
-        state: present 
+        state: present
 
 
 
