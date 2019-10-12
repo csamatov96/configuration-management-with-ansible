@@ -10,9 +10,9 @@
         dest: /tmp/
     - name: install Unzip
       package:
-        name: Unzip
+        name: unzip
         state: present
-    - name: Unzip
+    - name: unzip
       unarchive:
         src: /tmp/wordpress-5.2.3.zip
         dest: /tmp
