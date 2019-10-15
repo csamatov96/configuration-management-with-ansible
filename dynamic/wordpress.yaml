@@ -24,6 +24,7 @@
         - openssh-server
         - MySQL-python
         - python-devel
+        - python
       ignore_errors: true
 
     - name: start and enable MariaDB
