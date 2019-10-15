@@ -16,6 +16,7 @@
         - php-gd
         - httpd
         - mysql
+        - mariadb
         - mariadb-server
         - php 
         - php-mysql
