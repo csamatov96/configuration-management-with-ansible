@@ -40,12 +40,12 @@
     - name: Download wordpress package
       get_url:
         url: "https://wordpress.org/wordpress-5.1.1.zip"
-        dest: /tmp/wordpress.zip
+        dest: /tmp/
 
     - name: Unzip wordpress file
       unarchive:
-        src: /tmp/
-        dest: /var/www/html/https://wordpress.org/wordpress-5.1.1.zip
+        src: /tmp/wordpress-5.1.1.zip
+        dest: /var/www/html/
         remote_src: yes
       become: yes
       ignore_errors: true
