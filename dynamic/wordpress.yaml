@@ -16,68 +16,41 @@
         - php-gd
         - httpd
         - mysql
-        - mariadb
         - mariadb-server
         - php 
         - php-mysql
         - php-fpm
         - openssh-server
-        - MySQL-python
-        - python-devel
-        - python
       ignore_errors: true
-
-    - name: start and enable MariaDB
-      service:
-        name: "{{item}}"
-        state: started
-        enabled: yes
-      with_items:
-        - mariadb
-    
-    - name: create MySQL user
-      mysql_user:
-        user: enver
-        password: enver12345
-        priv: '*.*:ALL,GRANT'
-        state: present
-    
-    - name: create db for Wordpress
-      mysql_db:
-        name: enver_db
-        state: present
-
-    - name: Reload Privileges
-      command: 'mysql -ne "{{item}}"'
-      with_items:
-        - FLUSH PRIVILEGES
-      changed_when: false
 
     - name: Download wordpress package
       get_url:
-        url: "https://wordpress.org/wordpress-5.1.1.zip"
-        dest: /tmp/wordpress.zip
+        url: "https://wordpress.org/latest.tar.gz"
+        dest: /tmp/
 
     - name: Unzip wordpress file
       unarchive:
-        src: /tmp/wordpress.zip
+        src: /tmp/wordpress-5.2.4.tar.gz
         dest: /var/www/html/
         remote_src: yes
-      become: yes
-      ignore_errors: true
 
     - name: Move files to html folder
       shell: "mv /var/www/html/wordpress/*  /var/www/html/"
-      become: yes
-      become_method: sudo
       ignore_errors: yes
 
+    - name: updatee php
+      shell: "yum -y install epel-release" 
+    - name: a  
+      shell: "rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm"
+    - name: b    
+      shell: "yum -y install yum-utils"
+    - name: b        
+      shell: "yum-config-manager --enable remi-php70"
+    - name: c   
+      shell: "yum update -y"
+    - name: d  
+      shell: "systemctl restart httpd"
 
-
-    - name: copy wp-config.j2 file as wp-config.php
-      copy: 
-        src: ./wp-config.php
-        dest: /var/www/html/wp-config.php
 
     - name: Restart httpd 
       systemd:
