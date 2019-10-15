@@ -21,6 +21,8 @@
         - php-mysql
         - php-fpm
         - openssh-server
+        - MySQL-python
+        - python-devel
       ignore_errors: true
 
     - name: start and enable MariaDB
