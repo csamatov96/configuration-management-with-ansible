@@ -23,14 +23,40 @@
         - openssh-server
       ignore_errors: true
 
+    - name: start and enable MariaDB
+      service:
+        name: "{{item}}"
+        state: started
+        enabled: yes
+      with_items:
+        - mariadb
+    
+    - name: create MySQL user
+      mysql_user:
+        user: enver
+        password: enver12345
+        priv: '*.*:ALL,GRANT'
+        state: present
+    
+    - name: create db for Wordpress
+      mysql_db:
+        name: enver_db
+        state: present
+
+    - name: Reload Privileges
+      command: 'mysql -ne "{{item}}"'
+      with_items:
+        - FLUSH PRIVILEGES
+      changed_when: false
+
     - name: Download wordpress package
       get_url:
         url: "https://wordpress.org/wordpress-5.1.1.zip"
-        dest: /tmp/
+        dest: /tmp/wordpress.zip
 
     - name: Unzip wordpress file
       unarchive:
-        src: /tmp/wordpress-5.1.1.zip
+        src: /tmp/wordpress.zip
         dest: /var/www/html/
         remote_src: yes
       become: yes
@@ -41,6 +67,13 @@
       become: yes
       become_method: sudo
       ignore_errors: yes
+
+
+
+    - name: copy wp-config.j2 file as wp-config.php
+      copy: 
+        src: ./wp-config.php
+        dest: /var/www/html/wp-config.php
 
     - name: Restart httpd 
       systemd:
