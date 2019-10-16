@@ -17,7 +17,7 @@
     - name: Get Key
       shell: "r1soft-setup --get-key http://3.248.219.233:8080"
 
-    -name : Start agent
-     systemd: 
-       name: sbm-agent
-       state: restarted
+    - name: Start agent
+      systemd: 
+        name: sbm-agent
+        state: restarted
