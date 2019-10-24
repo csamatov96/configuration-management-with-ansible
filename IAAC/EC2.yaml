@@ -1,0 +1,13 @@
+---
+- name: Playbook for Provisioning
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  tasks:
+    - ec2:
+        key_name: ansible222
+        instance_type: "{{instance_type}}"
+        image: ami-0eab3a90fc693af19
+        count: "{{count}}"
+        vpc_subnet_id: "{{vpc_subnet_id}}"
+        assign_public_ip: yes
