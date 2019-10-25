@@ -9,7 +9,7 @@
       ec2_vpc_subnet:
         state: present
         region: eu-west-2
-        az: euw2-az2
+        az: eu-west-2a
         vpc_id: vpc-0df90bbb045d74bf4
         cidr: 10.10.1.0/24
         resource_tags:
