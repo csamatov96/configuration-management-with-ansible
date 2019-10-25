@@ -9,7 +9,7 @@
       ec2_vpc_subnet:
         state: present
         region: eu-west-2
-        az: ['euw2-az2', 'euw2-az3','euw2-az1']
+        az: euw2-az2
         vpc_id: vpc-0df90bbb045d74bf4
         count: 3
         cidr: ['10.10.1.0/24', '10.10.2.0/24','10.10.3.0/24']
