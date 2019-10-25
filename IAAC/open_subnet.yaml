@@ -15,4 +15,13 @@
         resource_tags:
           Name: Private Subnet
       register: private_subnet
-        
+    - name: Create subnet for database servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-west-2
+        az: eu-west-2b
+        vpc_id: vpc-0df90bbb045d74bf4
+        cidr: 10.10.2.0/24
+        resource_tags:
+          Name: Public Subnet
+      register: public_subnet    
