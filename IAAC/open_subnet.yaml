@@ -1,0 +1,19 @@
+---
+- name: Playbook for creating vpc
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  tasks:
+    - name: Create subnet for database servers
+      ec2_vpc_subnet:
+        count: 3
+        state: present
+        region: eu-west-2
+        vpc_id: vpc-0df90bbb045d74bf4
+        cidr: ['10.10.1.0/24', '10.10.2.0/24', '10.10.3.0/24']
+        resource_tags:
+          Name: ['privatesub1', 'privatesub2', 'privatesub3']
+      register: ['privatesub1', 'privatesub2', 'privatesub3']     
+
+    
