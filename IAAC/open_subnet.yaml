@@ -38,3 +38,36 @@
               - 22
             cidr_ip: 0.0.0.0/0
             rule_desc: allow all on port 80
+    - local_action:
+        module: ec2_elb_lb
+        state: present
+        name: 'New ELB'
+        security_group_ids: sg-0628115120201dcc7
+        region: eu-west-2
+        zones: eu-west-2b
+        subnets: 'subnet-0c169b89eb307ebde,subnet-0c826e80f68a5ec28'
+        purge_subnets: yes
+        listeners:
+          - protocol: http
+            load_balancer_port: 80
+            instance_port: 80
+    - name: create launch config
+      ec2_lc:
+        name: my_new_lc
+        image_id: ami-0058eac8cae55e22e
+        key_name: mywindows
+        region: eu-west-2
+        security_groups: sg-0628115120201dcc7
+        instance_type: t2.micro
+        assign_public_ip: yes
+
+    - ec2_asg:
+      name: myasg
+      launch_config_name: my_new_lc
+      health_check_period: 60
+      health_check_type: ELB
+      replace_all_instances: yes
+      min_size: 3
+      max_size: 12
+      desired_capacity: 3
+      region: eu-west-2         
