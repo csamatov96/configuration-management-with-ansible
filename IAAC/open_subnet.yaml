@@ -25,3 +25,16 @@
         resource_tags:
           Name: Public Subnet
       register: public_subnet    
+    - name: example using security group rule descriptions
+      ec2_group:
+        name: ssh and httpd open
+        description: sg with rule descriptions
+        vpc_id: vpc-0df90bbb045d74bf4 
+        region: eu-west-2
+        rules:
+          - proto: tcp
+            ports:
+              - 80
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 80
