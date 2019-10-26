@@ -1,2 +1,4 @@
 ---
 # vars file for package
+r1soft_server_ip: ""
+r1soft_server_port: ""
