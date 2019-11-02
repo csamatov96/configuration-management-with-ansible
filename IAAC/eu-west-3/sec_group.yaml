@@ -1,0 +1,20 @@
+---
+- name: Playbook sec group
+  hosts: localhost
+  tasks:
+    - name: Create sec group1
+      ec2_group:
+        name: SecGroupforvoc
+        description: sec group1 for vpc
+        vpc_id: vpc-0b2627c7de857e9e9
+        region: us-west-3
+        rules:
+          - proto: tcp
+            ports:
+            - 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            ports:
+            - 22
+            cidr_ip: 0.0.0.0/0  
+        ignore_errors: true     
