@@ -6,6 +6,7 @@
       ec2_vpc_subnet:
         state: present
         vpc_id: vpc-0b2627c7de857e9e9
+        region: eu-west-3
         cidr: 10.0.101.16/28
         tags:
           Name: Web Subnet1
@@ -15,6 +16,7 @@
       ec2_vpc_subnet:
         state: present
         vpc_id: vpc-0b2627c7de857e9e9
+        region: eu-west-3
         cidr: 10.0.102.16/28
         tags:
           Name: Web Subnet2
@@ -24,6 +26,7 @@
       ec2_vpc_subnet:
         state: present
         vpc_id: vpc-0b2627c7de857e9e9
+        region: eu-west-3
         cidr: 10.0.103.16/28
         tags:
           Name: Web Subnet3
