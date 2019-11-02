@@ -17,3 +17,4 @@
             ports:
             - 22
             cidr_ip: 0.0.0.0/0  
+        ignore_errors: true     
