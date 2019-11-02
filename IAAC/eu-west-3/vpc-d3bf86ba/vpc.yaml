@@ -7,7 +7,7 @@
         name: Module_dev2
         cidr_block: 10.10.0.0/16
         region: eu-west-3
-      tags:
-        Class: Ansible
-        Task: VPC
+        tags:
+          Class: Ansible
+          Task: VPC
       
